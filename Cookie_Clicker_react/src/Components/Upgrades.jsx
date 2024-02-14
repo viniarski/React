@@ -1,10 +1,12 @@
+import './Upgrades.css'
+
 export default function Upgrades() {
     const upgrades = ["Grany", "Super Oven", "Factory"];
   
     return (
-      <div>
+      <div className="upgrades">
         {upgrades.map((upgrade) => (
-          <button key={upgrade}>{upgrade}</button>
+          <button className='upg-btn' key={upgrade}>{upgrade}</button>
         ))}
       </div>
     );

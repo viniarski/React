@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap');
+
+.counter {
+  font-family: 'Rubik Burned', system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.cookie,
+.monster {
+  cursor: pointer;
+  width: 200px;
+}
+
+.cookie {
+  background-image: url('./assets/cookie.png');
+  background-color: white;
+  background-size: cover;
+  background-position: center;
+}
+
+.monster {
+  background-image: url('./assets/cookie_monster.png');
+  background-color: white;
+  background-size: cover;
+  background-position: center;
+}

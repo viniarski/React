@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-
+import './Game.css';
+import Upgrades from "./Upgrades";
 
 export default function Game() {
 
@@ -21,10 +22,17 @@ export default function Game() {
         }, []);
 
 return (
-    <div className="cookie">
-        <p>Cookies: {count}</p>
-        <button onClick={incrementCounter}>Get cookie</button>
-        <button onClick={resetCounter}>Reset counter</button>
-    </ div>
+    <>
+      <p className="counter">Cookies: {count}</p>
+      <div className="game">
+        <div onClick={incrementCounter}
+            className="cookie">
+        </div>
+        <Upgrades />
+        <div onClick={resetCounter} 
+            className="monster"> 
+        </div>
+      </div>
+    </>
 )
 }
