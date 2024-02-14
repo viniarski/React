@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Game.css";
 import Upgrades from "./Upgrades";
-import cookieImg from "./assets/cookie.png";
-import monsterImg from "./assets/cookie_monster.png";
+import Cookie from "./Cookie";
+import Monster from "./Monster";
 
 export default function Game() {
   const [count, setCount] = useState(() => {
@@ -39,13 +39,9 @@ export default function Game() {
     <>
       <p className="counter">Cookies: {count}</p>
       <div className="game">
-        <img src={cookieImg} alt="Cookie" className="image cookie"
-          onClick={incrementCounter}
-        />
+        <Cookie incrementCounter={incrementCounter} />
         <Upgrades />
-        <img src={monsterImg} alt="Monster" className="image monster"
-          onClick={resetCounter}
-        />
+        <Monster resetCounter={resetCounter} />
       </div>
     </>
   );
