@@ -1,37 +1,52 @@
-import { useState, useEffect } from "react";
-import './Game.css';
+import React, { useState, useEffect } from "react";
+import "./Game.css";
 import Upgrades from "./Upgrades";
-import cookieImg from './assets/cookie.png';
-import monsterImg from './assets/cookie_monster.png';
+import cookieImg from "./assets/cookie.png";
+import monsterImg from "./assets/cookie_monster.png";
 
-// The 🍪 🍪 🍪 Game!
 export default function Game() {
+  const [count, setCount] = useState(() => {
+    const savedCount = localStorage.getItem("cookieCount");
+    return savedCount ? parseInt(savedCount, 10) : 0;
+  });
 
-    const  [count, setCount] = useState(0);
+  function incrementCounter() {
+    setCount((prevCount) => {
+      const newCount = prevCount + 1;
+      localStorage.setItem("cookieCount", newCount);
+      return newCount;
+    });
+  }
 
-    function incrementCounter() {
-        setCount(count + 1);
-      }
+  function resetCounter() {
+    setCount(0);
+    localStorage.setItem("cookieCount", 0);
+  }
 
-    function resetCounter() {
-        setCount(0);
-      }
-    
-    useEffect(() => {
-        let interval = setInterval(() => {
-          setCount((count) => count + 1)}, 1000);
+  useEffect(() => {
+    let interval = setInterval(() => {
+      setCount((prevCount) => {
+        const newCount = prevCount + 1;
+        localStorage.setItem("cookieCount", newCount);
+        return newCount;
+      });
+    }, 1000);
 
-          return () => clearInterval(interval);
-        }, []);
+    return () => clearInterval(interval);
+  }, []);
 
-return (
+  return (
     <>
       <p className="counter">Cookies: {count}</p>
       <div className="game">
-        <img src={cookieImg} alt="Cookie" className="image cookie" onClick={incrementCounter} />
+        <img src={cookieImg} alt="Cookie" className="image cookie"
+          onClick={incrementCounter}
+        />
         <Upgrades />
-        <img src={monsterImg} alt="Monster" className="image monster" onClick={resetCounter} />
+        <img src={monsterImg} alt="Monster" className="image monster"
+          onClick={resetCounter}
+        />
       </div>
     </>
-)
+  );
 }
