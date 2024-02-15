@@ -2,11 +2,10 @@ import React from "react";
 import monsterImg from "./assets/cookie_monster.png";
 import './Monster.css'
 
-export default function ResetButton({ functionToChangeCount, resetUpgrades}) {
+export default function ResetButton({ resetCount}) {
 
   const handleReset = () => {
-    functionToChangeCount(0);
-    resetUpgrades();
+    resetCount(0);
   }
 
   return (

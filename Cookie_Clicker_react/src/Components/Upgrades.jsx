@@ -24,7 +24,7 @@ export default function Upgrades({ count, setCount }) {
   const [totalCookiesPerSecond, setTotalCookiesPerSecond] = useState(0);
 
   const buyUpgrade = (index) => {
-    const cost = upgrades[index].cost;
+    const cost = upgrades[index].cost
     if (count >= cost) {
       const upgrade = upgrades[index].cookiesPerSecond;
 

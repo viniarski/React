@@ -21,7 +21,7 @@ export default function Game() {
       <div className="game">
         <Cookie count={count} setCount={setCount} />
         <Upgrades count={count} setCount={setCount} />
-        <ResetButton functionToChangeCount={setCount} />
+        <ResetButton resetCount={setCount} />
       </div>
     </>
   );
