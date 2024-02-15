@@ -1,32 +1,59 @@
-import './Upgrades.css'
+import React, { useState, useEffect } from 'react';
+import './Upgrades.css';
 
-export default function Upgrades() {
-    const upgrades = ["Grany", "Super Oven", "Factory"];
-  
-    return (
-      <div className="upgrades">
-        {upgrades.map((upgrade) => (
-          <button className='upg-btn' key={upgrade}>{upgrade}</button>
-        ))}
-      </div>
-    );
-        }
+const upgradesData = [
+  {
+    button: 'Granny',
+    cost: 10,
+    cookiesPerSecond: 1,
+  },
+  {
+    button: 'Super oven',
+    cost: 100,
+    cookiesPerSecond: 10,
+  },
+  {
+    button: 'Factory',
+    cost: 1000,
+    cookiesPerSecond: 100,
+  },
+];
 
+export default function Upgrades({ count, setCount }) {
+  const [upgrades] = useState(upgradesData);
+  const [totalCookiesPerSecond, setTotalCookiesPerSecond] = useState(0);
 
-// [
-//   {
-//     button: "granny",
-//     cost: 10,
-//     speed: 1,
-//   },
-//   {
-//     button: "super_oven",
-//     cost: 100,
-//     speed: 10,
-//   },
-//   {
-//     button: "factory",
-//     cost: 1000,
-//     speed: 100,
-//   },
-// ];
+  const buyUpgrade = (index) => {
+    const cost = upgrades[index].cost;
+    if (count >= cost) {
+      const upgrade = upgrades[index].cookiesPerSecond;
+
+      setCount(preCount => preCount - cost);
+      setTotalCookiesPerSecond(prevTotalcookiesPerSecond => prevTotalcookiesPerSecond + upgrade);
+    } else {
+      console.log('Not enough cookies to buy this upgrade!');
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount(preCount => preCount + totalCookiesPerSecond);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [totalCookiesPerSecond]);
+
+  return (
+    <div className="upgrades">
+      {upgrades.map((upgrade, index) => (
+        <button
+          className={`upg-btn`}
+          key={upgrade.button}
+          onClick={() => buyUpgrade(index)}
+        >
+          {upgrade.button}| Cost: {upgrade.cost} | CPS: {upgrade.cookiesPerSecond}
+        </button>
+      ))}
+    </div>
+  );
+}

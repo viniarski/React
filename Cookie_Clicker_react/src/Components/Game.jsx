@@ -1,47 +1,27 @@
-import React, { useState, useEffect } from "react";
 import "./Game.css";
+import Counter from "./Counter";
 import Upgrades from "./Upgrades";
 import Cookie from "./Cookie";
-import Monster from "./Monster";
+import ResetButton from "./Monster";
+import { useState, useEffect } from "react";
 
 export default function Game() {
   const [count, setCount] = useState(() => {
-    const savedCount = localStorage.getItem("cookieCount");
+    const savedCount = localStorage.getItem("count");
     return savedCount ? parseInt(savedCount, 10) : 0;
   });
 
-  function incrementCounter() {
-    setCount((prevCount) => {
-      const newCount = prevCount + 1;
-      localStorage.setItem("cookieCount", newCount);
-      return newCount;
-    });
-  }
-
-  function resetCounter() {
-    setCount(0);
-    localStorage.setItem("cookieCount", 0);
-  }
-
   useEffect(() => {
-    let interval = setInterval(() => {
-      setCount((prevCount) => {
-        const newCount = prevCount + 1;
-        localStorage.setItem("cookieCount", newCount);
-        return newCount;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
+    localStorage.setItem("count", count);
+  }, [count]);
 
   return (
     <>
-      <p className="counter">Cookies: {count}</p>
+      <Counter count={count} setCount={setCount} />
       <div className="game">
-        <Cookie incrementCounter={incrementCounter} />
-        <Upgrades />
-        <Monster resetCounter={resetCounter} />
+        <Cookie count={count} setCount={setCount} />
+        <Upgrades count={count} setCount={setCount} />
+        <ResetButton functionToChangeCount={setCount} />
       </div>
     </>
   );
