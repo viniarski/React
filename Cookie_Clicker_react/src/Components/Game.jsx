@@ -1,6 +1,6 @@
 import "./Game.css";
 import Counter from "./Counter";
-import Cookie from "./Cookie";
+
 import { useState, useEffect } from "react";
 
 export default function Game() {
@@ -9,8 +9,6 @@ export default function Game() {
     return savedCount ? parseInt(savedCount, 10) : 0;
   });
 
-  const [totalCPS, setTotalCPS] = useState(0);
-
   useEffect(() => {
     localStorage.setItem("count", count);
   }, [count]);
@@ -18,9 +16,6 @@ export default function Game() {
   return (
     <>
       <Counter count={count} setCount={setCount} />
-      <div className="game">
-        <Cookie count={count} setCount={setCount} />
-      </div>
     </>
   );
 }

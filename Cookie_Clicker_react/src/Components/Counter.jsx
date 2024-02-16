@@ -3,6 +3,7 @@ import './Counter.css';
 import './Upgrades';
 import ResetButton from "./Monster";
 import Upgrades from './Upgrades';
+import Cookie from "./Cookie";
 
 export default function Counter({ count, setCount }) {
     const [totalCPS, setTotalCPS] = useState(0);
@@ -16,10 +17,13 @@ export default function Counter({ count, setCount }) {
     }, [totalCPS, setCount]);
 
     return (
-        <div>
+        <div className='container'>
             <p className="counter">Cookies: {count}</p>
-            <Upgrades count={count} setCount={setCount} setTotalCPS={setTotalCPS} />
-            <ResetButton resetCount={setCount} resetUpgrades={setTotalCPS} />
+            <div className='second-row'>
+                <Cookie count={count} setCount={setCount} />
+                <Upgrades count={count} setCount={setCount} setTotalCPS={setTotalCPS} />
+                <ResetButton resetCount={setCount} resetUpgrades={setTotalCPS} />
+            </div>
         </div>
     );
 }
