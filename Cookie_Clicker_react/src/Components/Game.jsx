@@ -1,5 +1,4 @@
 import Counter from "./Counter";
-
 import { useState, useEffect } from "react";
 
 export default function Game() {
