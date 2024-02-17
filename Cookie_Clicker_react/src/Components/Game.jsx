@@ -1,4 +1,3 @@
-import "./Game.css";
 import Counter from "./Counter";
 
 import { useState, useEffect } from "react";
